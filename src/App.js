@@ -1,7 +1,10 @@
 import React from 'react'; 
-import Header from './components/Header';
 //Import to start using tailwind
 import './App.css';
+
+import Header from './components/Header';
+import Body from './components/Body';
+
 
 /**
  * 1. Header
@@ -16,8 +19,8 @@ import './App.css';
 function App() {
   return (
     <>
-           <h1 className='font-serif bg-green-500'>Hello</h1>
            <Header/>
+           <Body/>
     </>
   );
 }
