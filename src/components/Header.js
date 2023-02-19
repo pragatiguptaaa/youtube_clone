@@ -1,17 +1,27 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import HamBurger from '../imgs/HamBurger.png';
+import {toggleMenu} from '../utils/menuSlice';
 import YouTubeLogo from '../imgs/YouTubeLogo.png';
 import ProfileLogo from '../imgs/ProfileLogo.jpg';
 
 
 //TOOD: Findout why h-8 works for img and not div.
 function Header() {
+  const dispatch = useDispatch();
+
+  const toggleMenuHandler = () =>{
+    dispatch(toggleMenu());
+  }
+  
   return (
     <div className='grid grid-flow-col p-5 m-2 shadow'>
         <div className = 'col-span-2 flex'>
           <img className='h-10'
            alt = "Loading Menu Icon..." 
             src = {HamBurger} 
+            onClick ={()=> toggleMenuHandler()}
           />
           <img className='h-10'
             alt =" Loading YouTube icon..."
