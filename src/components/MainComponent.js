@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import ButtonList from "./ButtonList";
 import VideoContainer from './VideoContainer';
 
 function MainComponent() {
   return (
     <div className='col-span-11'>
-        <h1> ButtonList</h1>
+        <ButtonList/>
         <VideoContainer/>
     </div>
   )
