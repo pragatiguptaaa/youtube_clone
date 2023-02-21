@@ -2,7 +2,7 @@ import React from 'react'
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 
-import { MOST_POPULAR_VIDEOS_YOUTUBE_API } from '../constants';
+import { MOST_POPULAR_VIDEOS_YOUTUBE_API } from '../utils/constants';
 import VideoCard from './VideoCard';
 
 const VideoContainer = () => {
