@@ -8,7 +8,7 @@ import ProfileLogo from '../imgs/ProfileLogo.jpg';
 
 
 //TOOD: Findout why h-8 works for img and not div.
-function Header() {
+const Header = () =>{
   const dispatch = useDispatch();
 
   const toggleMenuHandler = () =>{
