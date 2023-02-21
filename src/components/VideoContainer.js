@@ -4,7 +4,7 @@ import {useState, useEffect} from "react";
 import { MOST_POPULAR_VIDEOS_YOUTUBE_API } from '../constants';
 import VideoCard from './VideoCard';
 
-function VideoContainer() {
+const VideoContainer = () => {
 
   const [videos, setVideos] = useState(null);
 

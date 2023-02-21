@@ -3,7 +3,7 @@ import Button from "./Button";
 
 
 // TODO: Make it dynamic with scrollbar
-function ButtonList() {
+const ButtonList =() =>{
   return (
     <div className ="flex flex-wrap">
         <Button name ="All"/>

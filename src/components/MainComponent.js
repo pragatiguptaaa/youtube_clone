@@ -2,7 +2,7 @@ import React from 'react';
 import ButtonList from "./ButtonList";
 import VideoContainer from './VideoContainer';
 
-function MainComponent() {
+const MainComponent =() => {
   return (
     <div className='col-span-11'>
         <ButtonList/>

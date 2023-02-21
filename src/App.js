@@ -1,12 +1,14 @@
 import React from 'react'; 
 import { Provider } from 'react-redux';
+import { createBrowserRouter , RouterProvider} from 'react-router-dom';
 //Import to start using tailwind
 import './App.css';
 
 import Header from './components/Header';
 import Body from './components/Body';
+import MainComponent from './components/MainComponent';
 import store from "./utils/store";
-
+import WatchComponent from './components/WatchComponent';
 
 
 /**
@@ -19,15 +21,38 @@ import store from "./utils/store";
  *               VideoCard(Click -> Watch Page)
  */
 
-function App() {
+const appRouter = createBrowserRouter([
+  {
+    path:"/",
+    element:<Body/>,
+    children:[
+      {
+      path:"",
+      element:<MainComponent/>
+      }, 
+      {
+        path:"watch",
+        element:<WatchComponent/>
+      }
+    ]
+  }
+]);
+
+
+const  App = () => {
   return (
     <>
     <Provider store ={store}>
            <Header/>
-           <Body/>
+           <RouterProvider router={appRouter}></RouterProvider>
     </Provider>
     </>
   );
 }
+
+
+
+
+
 
 export default App;
