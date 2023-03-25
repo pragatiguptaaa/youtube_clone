@@ -10,6 +10,8 @@ import { YOUTUBE_SEARCH_API } from '../utils/constants';
 //TOOD: Findout why h-8 works for img and not div.
 const Header = () =>{
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const dispatch = useDispatch();
 
   const toggleMenuHandler = () =>{
@@ -17,13 +19,19 @@ const Header = () =>{
   }
 
   async function getSuggestions() {
-     const data = await fetch(YOUTUBE_SEARCH_API+searchQuery);
+     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
      const json = data.json();
+     setSuggestions(json[1]);
   }
   
   useEffect( () => {
-    getSuggestions();
-  }, [searchQuery]);
+   const searchTimer = setTimeout(getSuggestions(), 200);
+
+   return () =>{
+    clearTimeout(searchTimer);
+   }
+  }, [searchQuery]
+  );
 
 
   return (
@@ -39,14 +47,30 @@ const Header = () =>{
             src = {YouTubeLogo}
           />
         </div>
-        <div className='mx-10 px-10 col-span-6 flex justify-center'>
-          <input 
-            type="text" 
-            className='w-10/12 h-10 border border-gray-800 rounded-l'
-            value = {searchQuery}
-            onChange = {(e) => setSearchQuery(e.target.value)}
-          />
-          <button className='w-2/12 h-10  bg-gray-800 text-white rounded-r'> Search </button>
+        <div className='mx-10 px-10 col-span-6'>
+          <div>
+            <input 
+              type="text" 
+              className='w-10/12 h-10 border border-gray-800 rounded-l-full'
+              value = {searchQuery}
+              onChange = {(e) => setSearchQuery(e.target.value)}
+              onFocus = {() =>setShowSuggestions(true)}
+              onBlur ={() => setShowSuggestions(false)}
+            />
+            <button className='w-2/12 h-10  bg-gray-800 text-white rounded-r-full'> Search </button>
+          </div>
+          {
+            showSuggestions && 
+            <div className='w-[37rem] fixed border border-gray-800 shadow-lg'>
+              <ul>
+                { 
+                  suggestions && suggestions.map((suggestion) =>{
+                    <li key ={suggestion} className='bg-slate-100 hover:bg-gray-200'> hello</li>
+                  })
+                }         
+              </ul>
+            </div>
+          } 
         </div>
         <div className='col-span-3'>
           <img className='h-10'
