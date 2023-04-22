@@ -1,9 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
+
 import menuSlice from './menuSlice';
+import searchSuggestionsCacheSlice from './searchSuggestionsCacheSlice';
 
 const store = configureStore({
     reducer:{
-        menu: menuSlice
+        menu: menuSlice,
+        searchSuggestionsCache: searchSuggestionsCacheSlice
     }
 });
 export default store;

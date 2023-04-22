@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import HamBurger from '../imgs/HamBurger.png';
 import {toggleMenu} from '../utils/menuSlice';
 import YouTubeLogo from '../imgs/YouTubeLogo.png';
 import ProfileLogo from '../imgs/ProfileLogo.jpg';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
+import { addSearchSuggestions } from '../utils/searchSuggestionsCacheSlice';
 
 //TOOD: Findout why h-8 works for img and not div.
 const Header = () =>{
@@ -13,18 +14,26 @@ const Header = () =>{
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const dispatch = useDispatch();
+  const searchSuggestionsCache = useSelector((store)=> store.searchSuggestionsCache)
 
   const toggleMenuHandler = () =>{
     dispatch(toggleMenu());
   }
 
-  async function getSuggestions() {
-    console.log(""+YOUTUBE_SEARCH_API + searchQuery);
-     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-     const json = await data.json();
-     console.log(json);
-     setSuggestions(json[1]);
-     console.log("suggestions:    "+suggestions);
+  const getSuggestions =  async()  =>{
+    console.log("cache: "+searchSuggestionsCache);
+     if(searchSuggestionsCache[searchQuery]){
+      setSuggestions(searchSuggestionsCache[searchQuery]);
+     }
+     else
+     {
+      const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+      const json = await data.json();
+      setSuggestions(json[1]);
+      dispatch(addSearchSuggestions({
+        [searchQuery]:json[1]}
+        ));
+     }
   }
   
   useEffect( () => {
@@ -65,7 +74,6 @@ const Header = () =>{
           {
             showSuggestions && 
             <div className='w-[37rem] fixed border border-gray-800 shadow-lg'>
-              <h1> hello</h1>
               <ul>
                 { 
                   suggestions && suggestions.map((suggestion, index) =>(
