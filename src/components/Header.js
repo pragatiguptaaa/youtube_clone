@@ -19,13 +19,16 @@ const Header = () =>{
   }
 
   async function getSuggestions() {
+    console.log(""+YOUTUBE_SEARCH_API + searchQuery);
      const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-     const json = data.json();
+     const json = await data.json();
+     console.log(json);
      setSuggestions(json[1]);
+     console.log("suggestions:    "+suggestions);
   }
   
   useEffect( () => {
-   const searchTimer = setTimeout(getSuggestions(), 200);
+   const searchTimer = setTimeout(getSuggestions, 2000);
 
    return () =>{
     clearTimeout(searchTimer);
@@ -62,11 +65,12 @@ const Header = () =>{
           {
             showSuggestions && 
             <div className='w-[37rem] fixed border border-gray-800 shadow-lg'>
+              <h1> hello</h1>
               <ul>
                 { 
-                  suggestions && suggestions.map((suggestion) =>{
-                    <li key ={suggestion} className='bg-slate-100 hover:bg-gray-200'> hello</li>
-                  })
+                  suggestions && suggestions.map((suggestion, index) =>(
+                    <li key ={index} className='bg-slate-100 hover:bg-gray-200'> {suggestion}</li>
+                  ))
                 }         
               </ul>
             </div>
