@@ -73,11 +73,11 @@ const Header = () =>{
           </div>
           {
             showSuggestions && 
-            <div className='w-[37rem] fixed border border-gray-800 shadow-lg'>
+            <div className='w-[37rem] py-3 my-2 fixed border bg-white border-gray-200 rounded-3xl shadow-lg hover:shadow-2xl'>
               <ul>
                 { 
                   suggestions && suggestions.map((suggestion, index) =>(
-                    <li key ={index} className='bg-slate-100 hover:bg-gray-200'> {suggestion}</li>
+                    <li key ={index} className='font-bold font-serif hover:bg-gray-200 h-8'> {suggestion}</li>
                   ))
                 }         
               </ul>
