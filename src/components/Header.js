@@ -12,7 +12,7 @@ import { addSearchSuggestions } from '../utils/searchSuggestionsCacheSlice';
 const Header = () =>{
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const dispatch = useDispatch();
   const searchSuggestionsCache = useSelector((store)=> store.searchSuggestionsCache)
 
@@ -72,11 +72,11 @@ const Header = () =>{
             <button className='w-2/12 h-10  bg-gray-800 text-white rounded-r-full'> Search </button>
           </div>
           {
-            showSuggestions && 
+            showSuggestions && suggestions.length !=0 &&
             <div className='w-[37rem] py-3 my-2 fixed border bg-white border-gray-200 rounded-3xl shadow-lg hover:shadow-2xl'>
               <ul>
                 { 
-                  suggestions && suggestions.map((suggestion, index) =>(
+                   suggestions.map((suggestion, index) =>(
                     <li key ={index} className='font-bold font-serif hover:bg-gray-200 h-8'> {suggestion}</li>
                   ))
                 }         
