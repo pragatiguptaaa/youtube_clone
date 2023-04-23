@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { closeMenu } from '../utils/menuSlice';
 import CommentsContainer from './CommentsContainer';
-import { LiveChat } from './LiveChat';
+import LiveChat from './LiveChat';
 import { YOUTUBE_COMMENTS_API } from '../utils/constants';
 
 /**
